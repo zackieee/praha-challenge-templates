@@ -17,3 +17,5 @@ export class NameApiService {
     return firstName;
   }
 }
+
+export default new NameApiService();
