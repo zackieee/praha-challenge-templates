@@ -1,5 +1,6 @@
 export const sumOfArray = (numbers: number[]): number => {
-  return numbers.reduce((a: number, b: number): number => a + b);
+  const initialValue = 0;
+  return numbers.reduce((a: number, b: number): number => a + b, initialValue);
 };
 
 export const asyncSumOfArray = (numbers: number[]): Promise<number> => {

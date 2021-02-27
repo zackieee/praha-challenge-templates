@@ -13,9 +13,9 @@ test('sumOfArray - 正常系', () => {
 
 test('sumOfArray - 異常系', () => {
   try {
-    sumOfArray([]);
+    expect(sumOfArray([])).toBe(0);
   } catch (error){
-    expect(error.message).toMatch('Reduce of empty array with no initial value');
+    expect(error.message).toEqual('Reduce of empty array with no initial value');
 }});
 
 // asyncSumOfArray //
@@ -25,9 +25,9 @@ test('asyncSumOfArray - 正常系', async () => {
 
 test('asyncSumOfArraySometimesZero', async () => {
   try {
-    await asyncSumOfArray([]);
+    expect(await asyncSumOfArray([])).toBe(0);
   } catch (error) {
-    expect(error.message).toMatch('Reduce of empty array with no initial value');
+    expect(error.message).toEqual('Reduce of empty array with no initial value');
   }
 });
 
@@ -59,6 +59,7 @@ test('asyncSumOfArraySometimesZero - 異常系', async () => {
 // getFirstNameThrowIfLong //
 test('getFirstNameThrowIfLong - 正常系', async () => {
   // nameApiService用のMock
+  const getFirstNameMock = jest.fn().mockResolvedValue('yuckieee');
   const nameApiSerivceSpy = jest.spyOn(nameApiSerivce, 'getFirstName').mockResolvedValue('yuckieee');
   expect(await getFirstNameThrowIfLong(8, nameApiSerivce)).toBe('yuckieee')
   expect(nameApiSerivceSpy).toHaveBeenCalled();
