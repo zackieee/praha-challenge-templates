@@ -11,8 +11,8 @@ test('sumOfArray - 正常系', () => {
     expect(sumOfArray([1, 2])).toBe(3);
 });
 
-test('sumOfArray - 異常系', () => {
-    expect(() => sumOfArray([])).toThrow('Reduce of empty array with no initial value');
+test('sumOfArray - 異常系 → 正常系', () => {
+  expect(sumOfArray([])).toBe(0);
 });
 
 // asyncSumOfArray //
@@ -20,8 +20,8 @@ test('asyncSumOfArray - 正常系', async () => {
   expect(await asyncSumOfArray([1, 2])).toBe(3)
 });
 
-test('asyncSumOfArraySometimesZero', async () => {
-  await expect(asyncSumOfArray([])).rejects.toThrow('Reduce of empty array with no initial value');
+test('asyncSumOfArraySometimesZero- 異常系 → 正常系', async () => {
+  expect(await asyncSumOfArray([])).toBe(0);
 });
 
 // asyncSumOfArraySometimesZero //
