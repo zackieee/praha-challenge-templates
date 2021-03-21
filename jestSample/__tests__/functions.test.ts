@@ -12,11 +12,8 @@ test('sumOfArray - 正常系', () => {
 });
 
 test('sumOfArray - 異常系', () => {
-  try {
-    expect(sumOfArray([])).toBe(0);
-  } catch (error){
-    expect(error.message).toEqual('Reduce of empty array with no initial value');
-}});
+    expect(() => sumOfArray([])).toThrow('Reduce of empty array with no initial value');
+});
 
 // asyncSumOfArray //
 test('asyncSumOfArray - 正常系', async () => {
@@ -24,11 +21,7 @@ test('asyncSumOfArray - 正常系', async () => {
 });
 
 test('asyncSumOfArraySometimesZero', async () => {
-  try {
-    expect(await asyncSumOfArray([])).toBe(0);
-  } catch (error) {
-    expect(error.message).toEqual('Reduce of empty array with no initial value');
-  }
+  await expect(asyncSumOfArray([])).rejects.toThrow('Reduce of empty array with no initial value');
 });
 
 // asyncSumOfArraySometimesZero //
@@ -39,22 +32,9 @@ test('asyncSumOfArraySometimesZero - 正常系', async () => {
 })
 
 test('asyncSumOfArraySometimesZero - 異常系', async () => {
-  jest.spyOn(DatabaseMock, 'save').mockReturnValue;
-  try {
-    expect(await asyncSumOfArraySometimesZero([], DatabaseMock)).toBe(0)
-  } catch (error){
-    expect(error.message).toMatch('Reduce of empty array with no initial value');
-  }
-})
-
-test('asyncSumOfArraySometimesZero - 異常系', async () => {
   const databaseException = jest.fn().mockRejectedValue(new Error('fail!'));
-  try {
-    expect(await asyncSumOfArraySometimesZero([0], databaseException)).toBe(0)
-  } catch (error) {
-    expect(error.message).toMatch('fail!');
-  }
-})
+  expect(await asyncSumOfArraySometimesZero([0], databaseException)).toBe(0);
+});
 
 // getFirstNameThrowIfLong //
 test('getFirstNameThrowIfLong - 正常系', async () => {
